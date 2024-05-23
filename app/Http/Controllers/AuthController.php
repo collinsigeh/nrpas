@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\AccountConfirmation;
+use App\Mail\PasswordRecovery;
 use App\Models\Tempuser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -46,7 +47,7 @@ class AuthController extends Controller
         return to_route('web.reply', 'registation_received');
     }
 
-    public function confirmReg(Request $request, $confirmation_code)
+    public function confirmReg($confirmation_code)
     {
         $tempuser = Tempuser::where('confirm_code', $confirmation_code)->first();
 
@@ -116,7 +117,86 @@ class AuthController extends Controller
 
     public function recoverPassword(Request $request)
     {
-        //
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if(!$user)
+        {
+            return back()->with('error_message', 'The email "<b>'.$request->email.'</b> is not recognized.');
+        }
+
+        $confirmation_code = md5(uniqid(rand()));
+
+        $tempuser = Tempuser::firstOrCreate(
+            [
+                'email' => $user->email
+            ],
+            [
+                'confirm_code' => $confirmation_code,
+                'password' => $user->password
+            ]
+        );
+
+        if(!$tempuser)
+        {
+            return to_route('web.reply', 'error');
+        }
+        
+        Mail::to($tempuser->email)->send(new PasswordRecovery($tempuser));
+
+        return to_route('web.reply', 'password_reset_link');
+    }
+
+    public function resetPassword($confirmation_code)
+    {
+        $tempuser = Tempuser::where('confirm_code', $confirmation_code)->first();
+
+        if(!$tempuser)
+        {
+            return to_route('web.reply', 'expired_password_reset_link');
+        }
+
+        $user = User::where('email', $tempuser->email)->first();
+
+        if(!$user)
+        {
+            return to_route('web.reply', 'expired_password_reset_link');
+        }
+
+        return view('reset_password', [
+            'confirmation_code' => $confirmation_code
+        ]);
+    }
+
+    public function resetPasswordPost(Request $request)
+    {
+        $request->validate([
+            'confirmation_code' => 'required',
+            'password' => 'required|string|min:8|confirmed'
+        ]);
+
+        $tempuser = Tempuser::where('confirm_code', $request->confirmation_code)->first();
+
+        if(!$tempuser)
+        {
+            return to_route('web.reply', 'expired_password_reset_link');
+        }
+
+        $user = User::where('email', $tempuser->email)->first();
+
+        if(!$user)
+        {
+            return to_route('web.reply', 'expired_password_reset_link');
+        }
+
+        $user->password = Hash::make($request->password);
+        $user->save();
+        $tempuser->delete();
+    
+        return to_route('web.reply', 'password_reset_success');
     }
 
     public function webReply($case = null)
@@ -161,6 +241,52 @@ class AuthController extends Controller
                 <div class="mt-4 text-center">
                     <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
                     <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
+                </div>
+            ';
+        }
+        elseif($case == 'password_reset_link')
+        {
+            $message = '<div class="alert alert-success text-center">
+                <p>Your password reset link has been sent to the email you provided.<p>
+                Please, click on the link to change your account password.
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
+                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
+                </div>
+            ';
+        }
+        elseif($case == 'expired_password_reset_link')
+        {
+            $message = '<div class="alert alert-danger text-center">
+                This password reset link has expired.
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
+                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
+                </div>
+            ';
+        }
+        elseif($case == 'password_reset_success')
+        {
+            $message = '<div class="alert alert-success text-center">
+                <p>Your password has been changed successfully.<p>
+                Please login to proceed.
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
+                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
+                </div>
+            ';
+        }
+        elseif($case == 'error')
+        {
+            $message = '<div class="alert alert-danger text-center">
+                <p>An unexpected error has occured.<p>
+                Please try again.
+                </div>
+                <div class="mt-4 text-center">
+                    <a href="'.route('dashboard').'" class="my-custom-link">Home</a>
                 </div>
             ';
         }

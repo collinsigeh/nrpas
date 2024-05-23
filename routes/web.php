@@ -15,6 +15,8 @@ Route::get('/web/{case}', [AuthController::class, 'webReply'])->name('web.reply'
 
 Route::get('/forgot_password', [AuthController::class, 'forgotPassword'])->name('password.forget');
 Route::post('/recover_password', [AuthController::class, 'recoverPassword'])->name('password.recover');
+Route::get('/reset_password', [AuthController::class, 'resetPassword'])->name('password.reset');
+Route::post('/reset_password', [AuthController::class, 'resetPasswordPost'])->name('password.reset.post');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');

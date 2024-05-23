@@ -1,5 +1,5 @@
 <p>
-    This is your NRPAS email Comfirmation.
+    This is your NRPAS email comfirmation.
 </p>
 <p>
     Please, click on the link below to activate your account:
