@@ -13,10 +13,15 @@
     <link rel="stylesheet" href="/css/style.css" />
     <title>NRPAS | @yield('title', 'NCAA RPAS Registration')</title>
   </head>
-  <body>
+  <body onload="resizeMainSection">
     <!-- top navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: #01B8E2;">
       <div class="container-fluid">
+        <a
+          class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
+          href="#"
+          ><img src="images/nrpaslogo.png" alt="NRPAS" style="height: 65px;"></a
+        >
         <button
           class="navbar-toggler"
           type="button"
@@ -26,30 +31,10 @@
         >
           <span class="navbar-toggler-icon" data-bs-target="#sidebar"></span>
         </button>
-        <a
-          class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-          href="#"
-          ><img src="images/nrpaslogo.png" alt="NRPAS" style="height: 65px;"></a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#topNavBar"
-          aria-controls="topNavBar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="topNavBar">
           <form class="d-flex ms-auto my-3 my-lg-0">
           </form>
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">My Account</a></li>
-            <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">Logout</a></li>
-            <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">Help</a></li>
-          </ul>
+          @include('inc.top_navbar_links')
         </div>
       </div>
     </nav>
@@ -63,14 +48,14 @@
       <div class="offcanvas-body p-0">
         <nav class="navbar-dark">
           <ul class="navbar-nav">
-            <li>
+            <li style="padding-top: 50px">
               <div class="text-white my-4 px-3 py-4">
                 <div style="font-size: 12px;">Welcome,</div>
                 <div style="font-size: 21px;">User</div>
               </div>
             </li>
             <li>
-              <a href="#" class="nav-link px-3 active">
+              <a href="{{ route('dashboard') }}" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-house-door-fill"></i></span>
                 <span>Dashboard</span>
               </a>
@@ -94,6 +79,18 @@
                 <span>Add Drone</span>
               </a>
             </li>
+            <li>
+              <a href="{{ route('logout')}}" class="nav-link px-3 active d-block d-lg-none">
+                <span class="me-2"><i class="bi bi-box-arrow-right"></i></span>
+                <span>Logout</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link px-3 active d-block d-lg-none">
+                <span class="me-2"><i class="bi bi-question-square"></i></span>
+                <span>Help</span>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>
@@ -102,12 +99,12 @@
     <main class="mt-5 pt-3">
       <div class="container-fluid">
         <div style="height: 40px;"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <h4>Dashboard</h4>
-          </div>
+        <div id="main-body">
+            @yield('content')
         </div>
-
+      </div>
+      <div class="footer">
+        @include('inc.footer_credit')
       </div>
     </main>
     <script src="/js/bootstrap.bundle.min.js"></script>

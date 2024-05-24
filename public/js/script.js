@@ -45,3 +45,10 @@ $(document).ready(function () {
     $(table).DataTable();
   });
 });
+
+window.onload = function(){
+  var masterPage = document.getElementById('main-body');
+
+  let newheight = (window.innerHeight - 250) < 550 ? 550 : (window.innerHeight - 250);
+  masterPage.style.minHeight =  newheight +'px';
+};

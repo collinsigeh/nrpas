@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <title>NRPAS | @yield('title', 'NCAA RPAS Registration')</title>
   </head>
-  <body>
+  <body style="background-color: #f5f5f5;" onload="resizeMainSection">
     <!-- top navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: #01B8E2;">
       <div class="container-fluid">
@@ -36,24 +36,47 @@
         <div class="collapse navbar-collapse" id="topNavBar">
           <form class="d-flex ms-auto my-3 my-lg-0">
           </form>
-          <ul class="navbar-nav">
-            @auth
-              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('dashboard') }}">My Account</a></li>
-              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('logout') }}">Logout</a></li>
-            @else
-              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('register') }}">New Account</a></li>
-              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('login') }}">Login</a></li>
-            @endauth
-            <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">Help</a></li>
-          </ul>
+          @include('inc.top_navbar_links')
         </div>
       </div>
     </nav>
     <!-- top navigation bar -->
-    <div class="container">
+    <div class="container" id="main-body">
       <div style="height: 140px;"></div>
       @yield('content')
     </div>
+    <footer>
+        <div class="row">
+            <div class="col-md-2 text-md-end py-3">
+                <img src="/images/nrpaslogo.png" alt="" width="120px" style="padding-right: 20px;">
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <div class="col-md-4 ps-md-5 py-3">
+                  <a href="https://rpas-wg.org.ng/" class="footer-link">NRPAS Rulemaking Coalation<br>
+                    Aviation House - P. M. B. 21029 Ikeja<br>
+                    Murtala Mohammed Airport - Ikeja, Lagos</a>
+                </div>
+                <div class="col-md-4 ps-md-5 py-3">
+                  <a href="http://www.ncaa.gov.ng/" class="footer-link">Nigerian Civil Aviation Authority</a><br>
+                  <a href="http://www.nigeria.gov.ng/" class="footer-link">Federal Government of Nigeria</a><br>
+                  <a href="http://www.nama.gov.ng/" class="footer-link">Nigerian Airspace Management Agency</a><br>
+                </div>
+                <div class="col-md-4 ps-md-5 py-3">
+                  <a href="http://www.ncaa.gov.ng/directorates/consumer-protection/guidelines-for-filing-complaints/#" class="footer-link">Contact Nigerian CAA</a><br>
+                  <a href="http://www.ncaa.gov.ng/directorates/consumer-protection/guidelines-for-filing-complaints/#" class="footer-link">Document Tracking Office (DTO)</a><br>
+                  <a href="http://www.ncaa.gov.ng/directorates/consumer-protection/guidelines-for-filing-complaints/#" class="footer-link">Flight Standards Group (FSG)</a><br>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 py-3">
+              <img src="/images/ncaalogo.png" alt="">
+            </div>
+        </div>
+        <div class="footer-credit">
+          @include('inc.footer_credit')
+        </div>
+    </footer>
     <script src="/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
     <script src="/js/jquery-3.5.1.js"></script>

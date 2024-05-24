@@ -273,6 +273,15 @@ class AuthController extends Controller
     
     public function dashboard()
     {
-        dd('Logged in as: '.auth()->user()->email);
+        $user = auth()->user();
+
+        if(!$user->profile_complete)
+        {
+
+        }
+        
+        return view('dashboard',  [
+            'user' => $user
+        ]);
     }
 }
