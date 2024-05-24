@@ -125,7 +125,7 @@ class AuthController extends Controller
 
         if(!$user)
         {
-            return back()->with('error_message', 'The email "<b>'.$request->email.'</b> is not recognized.');
+            return back()->with('error_message', 'The email "<b>'.$request->email.'</b>" is not recognized.');
         }
 
         $confirmation_code = md5(uniqid(rand()));
@@ -201,6 +201,8 @@ class AuthController extends Controller
 
     public function webReply($case = null)
     {
+        $message = '';
+
         if($case == 'registation_received')
         {
             $message = '<div class="alert alert-success text-center">
@@ -214,10 +216,6 @@ class AuthController extends Controller
             $message = '<div class="alert alert-danger text-center">
                 This confirmtion link has expired.
                 </div>
-                <div class="mt-4 text-center">
-                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
-                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
-                </div>
             ';
         }
         elseif($case == 'account_activation_failed')
@@ -225,10 +223,6 @@ class AuthController extends Controller
             $message = '<div class="alert alert-danger text-center">
                 <p>Your account activation failed.<p>
                 Please contact '.config('app.name').' admin for help.
-                </div>
-                <div class="mt-4 text-center">
-                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
-                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
                 </div>
             ';
         }
@@ -238,10 +232,6 @@ class AuthController extends Controller
                 <p>Your account has been activated successfully.<p>
                 Please login to proceed.
                 </div>
-                <div class="mt-4 text-center">
-                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
-                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
-                </div>
             ';
         }
         elseif($case == 'password_reset_link')
@@ -250,20 +240,12 @@ class AuthController extends Controller
                 <p>Your password reset link has been sent to the email you provided.<p>
                 Please, click on the link to change your account password.
                 </div>
-                <div class="mt-4 text-center">
-                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
-                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
-                </div>
             ';
         }
         elseif($case == 'expired_password_reset_link')
         {
             $message = '<div class="alert alert-danger text-center">
                 This password reset link has expired.
-                </div>
-                <div class="mt-4 text-center">
-                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
-                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
                 </div>
             ';
         }
@@ -273,10 +255,6 @@ class AuthController extends Controller
                 <p>Your password has been changed successfully.<p>
                 Please login to proceed.
                 </div>
-                <div class="mt-4 text-center">
-                    <a href="'.route('login').'" class="my-custom-link">Login to Account</a> |
-                    <a href="'.route('register').'" class="my-custom-link">Create New Account</a>
-                </div>
             ';
         }
         elseif($case == 'error')
@@ -284,9 +262,6 @@ class AuthController extends Controller
             $message = '<div class="alert alert-danger text-center">
                 <p>An unexpected error has occured.<p>
                 Please try again.
-                </div>
-                <div class="mt-4 text-center">
-                    <a href="'.route('dashboard').'" class="my-custom-link">Home</a>
                 </div>
             ';
         }

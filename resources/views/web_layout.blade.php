@@ -37,8 +37,13 @@
           <form class="d-flex ms-auto my-3 my-lg-0">
           </form>
           <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">My Account</a></li>
-            <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">Logout</a></li>
+            @auth
+              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('dashboard') }}">My Account</a></li>
+              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('logout') }}">Logout</a></li>
+            @else
+              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('register') }}">New Account</a></li>
+              <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('login') }}">Login</a></li>
+            @endauth
             <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">Help</a></li>
           </ul>
         </div>

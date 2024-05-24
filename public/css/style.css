@@ -70,3 +70,35 @@ button {
 form small {
   font-size: 12px;
 }
+.my-custom-primary-web-button {
+  background-color: #01B8E2;
+  color: #fff;
+  border: 1px solid #01B8E2;
+  border-radius: 26px;
+  padding: 8px 18px;
+  margin: 10px 5px;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+  width: 240px;
+}
+.my-custom-primary-web-button:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.my-custom-secondary-web-button {
+  background-color: #c5c5c5;
+  color: #fff;
+  border: 1px solid #c5c5c5;
+  border-radius: 26px;
+  padding: 8px 18px;
+  margin: 10px 5px;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+  width: 240px;
+}
+.my-custom-secondary-web-button:hover {
+  color: #fff;
+  text-decoration: none;
+}

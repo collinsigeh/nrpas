@@ -40,7 +40,7 @@ class PasswordRecovery extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.password.recovery',
+            view: 'emails.password_recovery',
             with: [
                 'tempuser' => $this->tempuser
             ]

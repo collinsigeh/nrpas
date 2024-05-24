@@ -8,8 +8,8 @@
     Otherwise, click on the link below to change the password to your NRPAS account.
 </p>
 <p>
-    <a href="{{ route('register.confirmation', $tempuser->confirm_code) }}">
-        {{ route('register.confirmation', $tempuser->confirm_code) }}
+    <a href="{{ route('password.reset', $tempuser->confirm_code) }}">
+        {{ route('password.reset', $tempuser->confirm_code) }}
     </a>
 </p>
 <p>
