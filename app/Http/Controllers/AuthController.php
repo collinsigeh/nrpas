@@ -205,63 +205,71 @@ class AuthController extends Controller
 
         if($case == 'registation_received')
         {
-            $message = '<div class="alert alert-success text-center">
-                <p>Your NRPAS comfirmation link has been sent to the email address you registered with.<p>
-                Please, click on the link to activate your account.
+            $message = '<h2 class="my-custom-title text-center pb-3">Confirm Your Email</h2>
+                <div class="alert alert-success text-center">
+                    <p>Your NRPAS comfirmation link has been sent to the email address you registered with.<p>
+                    Please, click on the link to activate your account.
                 </div>
             ';
         }
         elseif($case == 'expired_confirmation_link')
         {
-            $message = '<div class="alert alert-danger text-center">
-                This confirmtion link has expired.
+            $message = '<h2 class="my-custom-title text-center pb-3">Expired Link</h2>
+                <div class="alert alert-danger text-center">
+                    This confirmtion link has expired.
                 </div>
             ';
         }
         elseif($case == 'account_activation_failed')
         {
-            $message = '<div class="alert alert-danger text-center">
-                <p>Your account activation failed.<p>
-                Please contact '.config('app.name').' admin for help.
+            $message = '<h2 class="my-custom-title text-center pb-3">Account Activation Failed</h2>
+                <div class="alert alert-danger text-center">
+                    <p>Your account activation failed.<p>
+                    Please contact '.config('app.name').' admin for help.
                 </div>
             ';
         }
         elseif($case == 'account_activation_success')
         {
-            $message = '<div class="alert alert-success text-center">
-                <p>Your account has been activated successfully.<p>
-                Please login to proceed.
+            $message = '<h2 class="my-custom-title text-center pb-3">Account Activated</h2>
+                <div class="alert alert-success text-center">
+                    <p>Your account has been activated successfully.<p>
+                    Please login to proceed.
                 </div>
             ';
         }
         elseif($case == 'password_reset_link')
         {
-            $message = '<div class="alert alert-success text-center">
-                <p>Your password reset link has been sent to the email you provided.<p>
-                Please, click on the link to change your account password.
+            $message = '<h2 class="my-custom-title text-center pb-3">Check Your Email</h2>
+                <div class="alert alert-success text-center">
+                    <p>Your password reset link has been sent to the email you provided.<p>
+                    Please, click on the link to change your account password.
                 </div>
             ';
         }
         elseif($case == 'expired_password_reset_link')
         {
-            $message = '<div class="alert alert-danger text-center">
-                This password reset link has expired.
+            $message = '<h2 class="my-custom-title text-center pb-3">Expired Link</h2>
+                <div class="alert alert-danger text-center">
+                    This password reset link has expired.
                 </div>
             ';
         }
         elseif($case == 'password_reset_success')
         {
-            $message = '<div class="alert alert-success text-center">
-                <p>Your password has been changed successfully.<p>
-                Please login to proceed.
+            $message = '<h2 class="my-custom-title text-center pb-3">Password Updated</h2>
+                <div class="alert alert-success text-center">
+                    <p>Your password has been changed successfully.<p>
+                    Please login to proceed.
                 </div>
             ';
         }
         elseif($case == 'error')
         {
-            $message = '<div class="alert alert-danger text-center">
-                <p>An unexpected error has occured.<p>
-                Please try again.
+            $message = '<h2 class="my-custom-title text-center pb-3">Oops!</h2>
+                <div class="alert alert-danger text-center">
+                    <p>An unexpected error has occured.<p>
+                    Please try again.
                 </div>
             ';
         }
@@ -277,9 +285,9 @@ class AuthController extends Controller
 
         if(!$user->profile_complete)
         {
-
+            return to_route('profile.create');
         }
-        
+
         return view('dashboard',  [
             'user' => $user
         ]);

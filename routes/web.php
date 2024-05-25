@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -28,4 +29,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::get('/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/profile_completion', [ProfileController::class, 'create'])->name('profile.create');
+    Route::post('/profile_completion', [ProfileController::class, 'store'])->name('profile.store');
 });
