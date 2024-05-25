@@ -165,3 +165,7 @@ footer {
 .main-description {
   font-size: 18px;
 }
+form.small-form input, form.small-form select, form.small-form textarea {
+  font-size: 14px;
+  padding: 15px 20px;
+}

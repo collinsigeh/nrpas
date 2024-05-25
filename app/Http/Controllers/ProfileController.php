@@ -22,6 +22,8 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'firstname' => 'required|string|min:2|max:65'
+        ]);
     }
 }
