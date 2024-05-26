@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RpasController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,4 +33,9 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::get('/profile_completion', [ProfileController::class, 'create'])->name('profile.create');
     Route::post('/profile_completion', [ProfileController::class, 'store'])->name('profile.store');
+
+    Route::get('/profile_type/{type}', [ProfileController::class, 'accountTypePost'])->name('profile.type.store');
+    Route::get('/profile_type', [ProfileController::class, 'accountTypeSelection'])->name('profile.type');
+
+    Route::get('/safety_agreement', [RpasController::class, 'safetyAgreement'])->name('rpas.safety');
 });

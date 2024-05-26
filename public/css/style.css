@@ -81,6 +81,7 @@ form small {
   text-decoration: none;
   display: inline-block;
   width: 240px;
+  text-align: center;
 }
 .my-custom-primary-web-button:hover {
   color: #fff;
@@ -97,6 +98,7 @@ form small {
   text-decoration: none;
   display: inline-block;
   width: 240px;
+  text-align: center;
 }
 .my-custom-secondary-web-button:hover {
   color: #fff;
@@ -168,4 +170,32 @@ footer {
 form.small-form input, form.small-form select, form.small-form textarea {
   font-size: 14px;
   padding: 15px 20px;
+}
+#acc-types a {
+  text-decoration: none;
+  color: #333;
+  text-align: center;
+}
+.acc-type {
+  margin: 25px 5px;
+  border: 5px solid #35CEFC;
+  border-radius: 16px;
+  padding: 40px 20px;
+}
+.acc-type h2 {
+  color: #35CEFC;
+}
+.acc-type p {
+  padding-top: 10px;
+  font-size: 14px;
+}
+.acc-type img {
+  width: 120px;
+}
+#safety-form .form-check {
+  padding: 7px 0 7px 30px;
+  font-size: 18px;
+}
+.form-check label:hover{
+  cursor: pointer;
 }

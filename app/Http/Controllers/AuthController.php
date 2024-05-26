@@ -287,6 +287,10 @@ class AuthController extends Controller
         {
             return to_route('profile.create');
         }
+        if(!$user->acc_type_set)
+        {
+            return to_route('profile.type');
+        }
 
         return view('dashboard',  [
             'user' => $user
