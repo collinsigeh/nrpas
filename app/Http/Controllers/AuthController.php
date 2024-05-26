@@ -70,6 +70,7 @@ class AuthController extends Controller
 
         $tempuser->delete();
         $user->reg_no = 'NRPAS-'.$user->id;
+        $user->registered_at = date('Y-m-d H:i:s', time());
         $user->save();
         
 
@@ -292,8 +293,30 @@ class AuthController extends Controller
             return to_route('profile.type');
         }
 
+        $time_used = time() - strtotime($user->registered_at);
+        $days_used = 0;
+        $days_remaining = 365;
+        $license_active = 1;
+
+        if($time_used >= (24 * 60 * 60))
+        {
+            $days_used = floor($time_used / (24 * 60 * 60));
+        }
+
+        if($days_used < $days_remaining)
+        {
+            $days_remaining = $days_remaining - $days_used;
+        }
+        else
+        {
+            $days_remaining = 0;
+            $license_active = 0;
+        }
+
         return view('dashboard',  [
-            'user' => $user
+            'user' => $user,
+            'days_remaining' => $days_remaining,
+            'license_active' => $license_active
         ]);
     }
 }

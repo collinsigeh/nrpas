@@ -38,4 +38,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile_type', [ProfileController::class, 'accountTypeSelection'])->name('profile.type');
 
     Route::get('/safety_agreement', [RpasController::class, 'safetyAgreement'])->name('rpas.safety');
+    Route::post('/safety_agreement', [RpasController::class, 'safetyAgreementPost'])->name('rpas.safety.post');
+    Route::get('/add_rpas', [RpasController::class, 'create'])->name('rpas.create');
+    Route::post('/add_rpas', [RpasController::class, 'store'])->name('rpas.store');
 });

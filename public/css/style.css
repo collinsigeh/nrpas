@@ -199,3 +199,46 @@ form.small-form input, form.small-form select, form.small-form textarea {
 .form-check label:hover{
   cursor: pointer;
 }
+.my-custom-primary-btn {
+  background-color: #01B8E2;
+  color: #fff;
+  border: 1px solid #01B8E2;
+  border-radius: 26px;
+  padding: 8px 18px;
+  margin: 10px 5px;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+}
+.my-custom-primary-btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+.my-custom-secondary-btn {
+  background-color: #c5c5c5;
+  color: #fff;
+  border: 1px solid #c5c5c5;
+  border-radius: 26px;
+  padding: 8px 18px;
+  margin: 10px 5px;
+  font-size: 18px;
+  text-decoration: none;
+  display: inline-block;
+}
+.my-custom-secondary-btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+#welcome_box {
+  margin: 30px 10px 10px 10px;
+  border-radius: 18px;
+  padding: 30px 20px 20px 20px;
+  background-color: #f5f5f5;
+}
+#today {
+  font-weight: 700;
+}
+#welcome_box p {
+  font-size: 18px;
+  font-weight: 500;
+}

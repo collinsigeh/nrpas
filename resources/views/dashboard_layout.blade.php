@@ -51,7 +51,7 @@
             <li style="padding-top: 50px">
               <div class="text-white my-4 px-3 py-4">
                 <div style="font-size: 12px;">Welcome,</div>
-                <div style="font-size: 21px;">User</div>
+                <div style="font-size: 27px; font-weight: 700;">{{ ucwords(Auth::user()->profile->firstname) }}</div>
               </div>
             </li>
             <li>
@@ -70,11 +70,11 @@
               <a href="#" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-list-check"></i></span>
                 <span>Registered RPAS</span>
-                <span class="badge bg-white rounded-pill text-info">4</span>
+                <span class="badge bg-white rounded-pill text-info">{{ Auth::user()->rpases->count() }}</span>
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link px-3 active">
+              <a href="{{ route('rpas.create')}}" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-plus-square"></i></span>
                 <span>Add Drone</span>
               </a>

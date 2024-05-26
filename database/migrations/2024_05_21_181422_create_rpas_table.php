@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('manufacturer', 65);
             $table->string('serial_no', 65);
             $table->string('model_no', 65);
-            $table->string('cert_no', 65);
+            $table->string('cert_no', 65)->nullable();
             $table->string('nickname', 65);
             $table->foreignId('rpastype_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();

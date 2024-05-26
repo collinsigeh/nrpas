@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamp('registered_at')->nullable();
+            $table->timestamp('registered_at')->nullable(); // when the current 1 year subscription (will) start running
             $table->boolean('profile_complete')->default(false);
             $table->boolean('acc_type_set')->default(false);
             $table->string('acc_type', 20)->nullable();

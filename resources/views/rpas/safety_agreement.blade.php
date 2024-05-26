@@ -9,7 +9,7 @@
 
             @include('inc.alert_messages')
 
-            <form action="{{ route('login.post') }}" method="post" class="mt-4" id="safety-form">
+            <form action="{{ route('rpas.safety.post') }}" method="post" class="mt-4" id="safety-form">
                 @csrf
 
                 <div class="form-check">
@@ -62,10 +62,14 @@
                 </div>
                 
                 <div class="mt-4">
-                    <a href="{{route('register')}}" class="my-custom-secondary-web-button">Don't Agree</a>
-                    <a href="{{route('login')}}" class="my-custom-primary-web-button">Agree</a>
+                    <button type="button" class="my-custom-secondary-web-button" data-bs-toggle="modal" data-bs-target="#dontAgreeNotice">
+                        Don't Agree
+                    </button>
+                    <input type="submit" value="Agree" class="my-custom-primary-web-button">
                 </div>
             </form>
         </div>
     </div>
+
+    @include('rpas.partials.dont_agree_notice')
 @endsection
