@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rpas;
 use App\Models\Rpastype;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RpasController extends Controller
 {
@@ -93,5 +94,19 @@ class RpasController extends Controller
     public function index()
     {
         return view('rpas.index');
+    }
+
+    public function certificate($id)
+    {
+        $rpas = Rpas::where('id', $id)->where('user_id', Auth::user()->id)->first();
+
+        if(!$rpas)
+        {
+            return back()->with('error_message', 'We could not retrieve the requested certificate. Please try again.');
+        }
+
+        return view('rpas.certificate', [
+            'rpas' => $rpas
+        ]);
     }
 }

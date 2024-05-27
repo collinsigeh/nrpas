@@ -242,3 +242,10 @@ form.small-form input, form.small-form select, form.small-form textarea {
   font-size: 18px;
   font-weight: 500;
 }
+.my_custom_table_link {
+  text-decoration: none;
+  color: #333;
+}
+.my_custom_table_link:hover {
+  color: #c5c5c5;
+}

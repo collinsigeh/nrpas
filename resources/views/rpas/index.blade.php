@@ -15,38 +15,38 @@
             <table
               id="example"
               class="table table-striped data-table"
-              style="width: 100%; font-size: 14px; padding: 15px 0; color: #727272;"
+              style="width: 100%; font-size: 12px; padding: 15px 0; color: #727272;"
             >
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
+                  <th>Manufacturer</th>
+                  <th>Serial No.</th>
+                  <th>Model No.</th>
+                  <th>Certificate No.</th>
+                  <th>Nickname</th>
+                  <th>Owner</th>
+                  <th>Date Registered</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>61</td>
-                  <td>2011/04/25</td>
-                  <td>$320,800</td>
-                </tr>
+                @foreach (Auth::user()->rpases as $rpas)
+                    <tr>
+                    <td>{{ $rpas->manufacturer }}</td>
+                    <td>{{ $rpas->serial_no}}</td>
+                    <td>{{ $rpas->model_no}}</td>
+                    <td><a href="{{ route('rpas.certificate', $rpas->id)}}" class="my_custom_table_link" title="Click to view certificate">{{ $rpas->cert_no}}</a></td>
+                    <td>{{ $rpas->nickname}}</td>
+                    <td>
+                        @if ($rpas->user->profile->org_name)
+                            {{ $rpas->user->profile->org_name }}
+                        @else
+                            {{ $rpas->user->firstname.' '. $rpas->user->lastname }}
+                        @endif
+                    </td>
+                    <td>{{ $rpas->registered_at }}</td>
+                    </tr>
+                @endforeach
               </tbody>
-              <tfoot>
-                <tr>
-                  <th>Name</th>
-                  <th>Position</th>
-                  <th>Office</th>
-                  <th>Age</th>
-                  <th>Start date</th>
-                  <th>Salary</th>
-                </tr>
-              </tfoot>
             </table>
           </div>
 

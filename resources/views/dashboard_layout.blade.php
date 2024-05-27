@@ -61,7 +61,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link px-3 active">
+              <a href="{{ route('profile.show') }}" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-person-fill"></i></span>
                 <span>User Profile</span>
               </a>

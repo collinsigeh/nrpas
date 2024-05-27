@@ -46,58 +46,24 @@ $(document).ready(function () {
   });
 });
 
-window.onload = function(){
-  // var masterPage = document.getElementById('main-body');
+function printCertificate()
+{
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
 
-  // let newheight = (window.innerHeight - 250) < 550 ? 550 : (window.innerHeight - 250);
-  // masterPage.style.minHeight =  newheight +'px';
-  var today = document.getElementById('today');
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h1>' + document.title  + '</h1>');
+    mywindow.document.write(document.getElementById('certToPrint').innerHTML);
+    mywindow.document.write('</body></html>');
 
-  const date = new Date();
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
 
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
+    mywindow.print();
+    mywindow.close();
 
-  if(month == 1) {
-    month = 'January';
-  }
-  else if(month == 2) {
-    month = 'February';
-  }
-  else if(month == 3) {
-    month = 'March';
-  }
-  else if(month == 4) {
-    month = 'April';
-  }
-  else if(month == 5) {
-    month = 'May';
-  }
-  else if(month == 6) {
-    month = 'June';
-  }
-  else if(month == 7) {
-    month = 'July';
-  }
-  else if(month == 8) {
-    month = 'August';
-  }
-  else if(month == 9) {
-    month = 'September';
-  }
-  else if(month == 10) {
-    month = 'October';
-  }
-  else if(month == 11) {
-    month = 'November';
-  }
-  else if(month == 12) {
-    month = 'December';
-  }
-
-  today.innerText = day + ' of ' + month + ' ' + year;
-};
+    return true;
+}
 
 function doIncrement(maxVaue)
 {
@@ -109,3 +75,4 @@ function doIncrement(maxVaue)
     daysRemaining.innerHTML = thisValue;
   }
 }
+

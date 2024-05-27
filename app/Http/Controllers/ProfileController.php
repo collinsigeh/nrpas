@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -108,5 +109,45 @@ class ProfileController extends Controller
         $user->save();
 
         return to_route('rpas.safety');
+    }
+
+    public function profile()
+    {
+        return view('profile.show', [
+            'user' => Auth::user(),
+        ]);
+    }
+
+    public function profilePost(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|string|min:2|max:20',
+            'country' => 'required|string|min:2|max:65',
+            'street_address' => 'required|string|min:2|max:160',
+            'city' => 'required|string|min:2|max:65',
+            'state' => 'required|string|min:2|max:65',
+        ]);
+
+        $user = $request->user();
+
+        $profile = Profile::where('user_id', $user->id)->first();
+        if(!$profile)
+        {
+            return back()->with('error_message', 'An unexpected error occured. Please try again.');
+        }
+
+        $profile->phone = $request->phone;
+        $profile->country = $request->country;
+        $profile->street_address = $request->street_address;
+        $profile->apt_no = $request->apt_no ? $request->apt_no : null;
+        $profile->city = $request->city;
+        $profile->state = $request->state;
+        $profile->postcode = $request->postcode ? $request->postcode : null;
+        $profile->org_name = $request->org_name ? $request->org_name : null;
+        $profile->rcc_no = $request->rcc_no ? $request->rcc_no : null;
+        
+        $profile->save();
+
+        return back()->with('success_message', 'Update saved!');
     }
 }
