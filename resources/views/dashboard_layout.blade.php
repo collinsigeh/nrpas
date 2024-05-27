@@ -67,7 +67,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link px-3 active">
+              <a href="{{ route('rpas.index') }}" class="nav-link px-3 active">
                 <span class="me-2"><i class="bi bi-list-check"></i></span>
                 <span>Registered RPAS</span>
                 <span class="badge bg-white rounded-pill text-info">{{ Auth::user()->rpases->count() }}</span>

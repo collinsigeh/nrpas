@@ -41,4 +41,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/safety_agreement', [RpasController::class, 'safetyAgreementPost'])->name('rpas.safety.post');
     Route::get('/add_rpas', [RpasController::class, 'create'])->name('rpas.create');
     Route::post('/add_rpas', [RpasController::class, 'store'])->name('rpas.store');
+    Route::get('registered_rpas', [RpasController::class, 'index'])->name('rpas.index');
 });

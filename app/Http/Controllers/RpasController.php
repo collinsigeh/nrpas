@@ -83,9 +83,15 @@ class RpasController extends Controller
         }
 
         $rpas->cert_no = 'NRPAS/CERT/'.$rpas->id;
+        $rpas->registered_at = date('Y-m-d H:i:s', time());
         $rpas->save();
         $request->session()->forget('safety_agreement');
 
         return to_route('dashboard')->with('success_message', 'Your RPAS has been added successfully.');
+    }
+
+    public function index()
+    {
+        return view('rpas.index');
     }
 }
