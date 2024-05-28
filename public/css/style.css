@@ -249,3 +249,6 @@ form.small-form input, form.small-form select, form.small-form textarea {
 .my_custom_table_link:hover {
   color: #c5c5c5;
 }
+#certToPrint {
+  display: none;
+}

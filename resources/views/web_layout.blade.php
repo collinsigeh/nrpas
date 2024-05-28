@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <title>NRPAS | @yield('title', 'NCAA RPAS Registration')</title>
   </head>
-  <body style="background-color: #f5f5f5;" onload="resizeMainSection">
+  <body style="background-color: #f5f5f5;">
     <!-- top navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: #01B8E2;">
       <div class="container-fluid">
