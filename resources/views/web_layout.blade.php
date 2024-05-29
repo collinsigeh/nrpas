@@ -41,10 +41,9 @@
       </div>
     </nav>
     <!-- top navigation bar -->
-    <div class="container" id="main-body">
-      <div style="height: 140px;"></div>
-      @yield('content')
-    </div>
+
+    @yield('content')
+    
     <footer>
         <div class="row">
             <div class="col-md-2 text-md-end py-3">

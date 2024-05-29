@@ -252,3 +252,18 @@ form.small-form input, form.small-form select, form.small-form textarea {
 #certToPrint {
   display: none;
 }
+#my-hero {
+  min-height: 300px;
+  background-image: url(/images/home_background.jpg);
+}
+#my-hero #welcome {
+  font-size: 48px;
+  font-weight: 500;
+  color: #fff;
+}
+#my-hero #title {
+  font-size: 64px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 4.5rem;
+}

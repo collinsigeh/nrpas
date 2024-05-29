@@ -3,6 +3,9 @@
 @section('title', 'Select Account Type')
 
 @section('content')
+
+<div class="container" id="main-body">
+    <div style="height: 140px;"></div>
     <div class="row">
         <div class="col-md-12 text-center">
             <h1 class="my-custom-title">Account Type</h1>
@@ -32,4 +35,6 @@
             </div>
         </div>
     </div>
+</div>
+
 @endsection
