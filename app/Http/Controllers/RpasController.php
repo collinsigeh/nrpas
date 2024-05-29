@@ -105,8 +105,21 @@ class RpasController extends Controller
             return back()->with('error_message', 'We could not retrieve the requested certificate. Please try again.');
         }
 
-        return view('rpas.certificate', [
-            'rpas' => $rpas
-        ]);
+        if($rpas->user->acc_type == 'R')
+        {
+            return view('rpas.certificate.recreational', [
+                'rpas' => $rpas
+            ]);
+        }
+        elseif($rpas->user->acc_type == 'C')
+        {
+            return view('rpas.certificate.commercial', [
+                'rpas' => $rpas
+            ]);
+        }
+        else
+        {
+            return to_route('web.reply', 'suspended_certificate_type');
+        }
     }
 }

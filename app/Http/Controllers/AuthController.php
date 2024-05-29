@@ -265,6 +265,15 @@ class AuthController extends Controller
                 </div>
             ';
         }
+        elseif($case == 'suspended_certificate_type')
+        {
+            $message = '<h2 class="my-custom-title text-center pb-3">Suspended Certificate Type</h2>
+                <div class="alert alert-danger text-center">
+                    <p>The requested certificate type has been suspended.<p>
+                    Please contact our office for more details.
+                </div>
+            ';
+        }
         elseif($case == 'error')
         {
             $message = '<h2 class="my-custom-title text-center pb-3">Oops!</h2>
