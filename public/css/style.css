@@ -257,13 +257,122 @@ form.small-form input, form.small-form select, form.small-form textarea {
   background-image: url(/images/home_background.jpg);
 }
 #my-hero #welcome {
-  font-size: 48px;
+  font-size: 42px;
+  font-weight: 500;
+  color: #fff;
+}
+#my-hero #welcome-mobile {
+  font-size: 32px;
   font-weight: 500;
   color: #fff;
 }
 #my-hero #title {
-  font-size: 64px;
+  font-size: 57px;
   font-weight: 500;
   color: #fff;
   line-height: 4.5rem;
+}
+#my-hero #title-mobile {
+  font-size: 42px;
+  font-weight: 500;
+  color: #fff;
+  line-height: 3rem;
+}
+#my-hero #buttons {
+  padding: 70px 0 100px 0;
+}
+.web-button-blue {
+  display: inline-block;
+  background-color: #35CEFC;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 32px;
+  margin: 5px 5px 5px 0;
+  border-radius: 30px;
+}
+.web-button-blue:hover {
+  color: #fff;
+  background-color: #01b8e2;
+  text-decoration: none;
+}
+.web-button-white {
+  display: inline-block;
+  background-color: #fff;
+  color: #01b8e2;
+  text-decoration: none;
+  padding: 14px 32px;
+  margin: 5px 5px 5px 0;
+  border-radius: 30px;
+}
+.web-button-white:hover {
+  color: #01b8e2;
+  text-decoration: none;
+}
+#sub-hero {
+  padding: 70px 10px 0 10px;
+  background-color: #f5f5f5;
+  color: #aaa;
+}
+#sub-hero .sub-title {
+  font-size: 42px;
+  max-width: 750px;
+  margin: auto;
+}
+#sub-hero .sub-title-mobile {
+  font-size: 32px;
+  max-width: 350px;
+  margin: auto;
+}
+#sub-hero .sub-text {
+  font-size: 36px;
+  max-width: 750px;
+  margin: 20px auto;
+}
+#sub-hero .sub-text-mobile {
+  font-size: 24px;
+  max-width: 380px;
+  margin: 15px auto;
+}
+#sub-hero2 {
+  color: #666;
+  max-width: 900px;
+  margin: auto;
+  padding: 50px 20px;
+}
+#sub-hero2 .sub-title {
+  font-size: 42px;
+}
+#sub-hero2 .sub-title-mobile {
+  text-align: center;
+  font-size: 32px;
+}
+.page-text {
+  padding: 20px;
+  padding-left: 50px;
+  font-size: 24px;
+}
+.page-text-mobile {
+  padding: 15px;
+  padding-left: 35px;
+  font-size: 18px;
+}
+.web-link {
+  color: #35CEFC;
+  font-size: 24px;
+  font-weight: 500;
+  text-decoration: none;
+}
+.web-link:hover {
+  color: #01b8e2;
+  text-decoration: none;
+}
+#privacy {
+  padding: 20px;
+}
+#page {
+  padding: 150px 20px 10px 20px;
+  color:#666
+}
+#page h3, #page h4, #page h5 {
+  color: #333;
 }

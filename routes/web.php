@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RpasController;
 use Illuminate\Support\Facades\Route;
@@ -8,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
+
+Route::get('/learn_more', [PageController::class, 'learn_more'])->name('page.learn_more');
+Route::get('/help', [PageController::class, 'help'])->name('page.help');
 
 Route::get('/web/{case}', [AuthController::class, 'webReply'])->name('web.reply');
 

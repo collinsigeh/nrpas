@@ -15,11 +15,11 @@
   </head>
   <body style="background-color: #f5f5f5;">
     <!-- top navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: #01B8E2;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: #01B8E2; border-bottom: 1px solid #96e7ff;">
       <div class="container-fluid">
         <a
           class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
-          href="#"
+          href="{{ route('home') }}"
           ><img src="/images/nrpaslogo.png" alt="NRPAS" style="height: 65px;"></a
         >
         <button

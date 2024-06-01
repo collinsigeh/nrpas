@@ -4,10 +4,10 @@
 
 @section('content')
 @include('inc.alert_messages')
-<div class="row">
+<div class="row counters">
     <div class="col-md-4 col-xl-3">
         <div class="main-item main-item-1">
-            <div class="main-value" id="days_remaining">{{ $days_remaining }}</div>
+            <div class="main-value counter" data-target="{{ $days_remaining }}" id="days_remaining">0</div>
             <div class="main-description"># of days left before License expires.</div>
         </div>
     </div>
@@ -27,7 +27,7 @@
     </div>
     <div class="col-md-4 col-xl-3">
         <div class="main-item main-item-3">
-            <div class="main-value">{{ Auth::user()->rpases->count() }}</div>
+            <div class="main-value counter" data-target="{{ Auth::user()->rpases->count() }}">0</div>
             <div class="main-description"># registered RPAS.</div>
         </div>
     </div>

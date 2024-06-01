@@ -7,5 +7,5 @@
       <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('register') }}">New Account</a></li>
       <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('login') }}">Login</a></li>
     @endauth
-    <li class="nav-item"><a class="nav-link my-custom-nav-link" href="#">Help</a></li>
+    <li class="nav-item"><a class="nav-link my-custom-nav-link" href="{{ route('page.help') }}">Help</a></li>
   </ul>
