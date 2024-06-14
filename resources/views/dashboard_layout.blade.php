@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
@@ -20,7 +20,7 @@
         <a
           class="navbar-brand me-auto ms-lg-0 ms-3 text-uppercase fw-bold"
           href="{{ route('dashboard') }}"
-          ><img src="images/nrpaslogo.png" alt="NRPAS" style="height: 65px;"></a
+          ><img src="/images/nrpaslogo.png" alt="NRPAS" style="height: 65px;"></a
         >
         <button
           class="navbar-toggler"
@@ -62,7 +62,7 @@
             </li>
             @if (Auth::user()->acc_type == 'A')
               <li>
-                <a href="#" class="nav-link px-3 active">
+                <a href="{{ route('packages.index') }}" class="nav-link px-3 active">
                   <span class="me-2"><i class="bi bi-box-seam"></i></span>
                   <span>Packages</span>
                 </a>

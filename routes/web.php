@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RpasController;
@@ -51,4 +52,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/add_rpas', [RpasController::class, 'store'])->name('rpas.store');
     Route::get('registered_rpas', [RpasController::class, 'index'])->name('rpas.index');
     Route::get('certificate/{id}', [RpasController::class, 'certificate'])->name('rpas.certificate');
+
+    Route::resource('/packages', PackageController::class);
 });

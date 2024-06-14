@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('validity'); // i.e. how many years this subscription package will be valid
             $table->float('price', 10, 2);
             $table->boolean('is_active')->default(true);
             $table->timestamps();
