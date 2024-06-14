@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\AccountConfirmation;
 use App\Mail\PasswordRecovery;
+use App\Models\Order;
 use App\Models\Profile;
 use App\Models\Rpas;
 use App\Models\Tempuser;
@@ -303,6 +304,15 @@ class AuthController extends Controller
         {
             return to_route('profile.type');
         }
+        if($user->acc_type == 'A')
+        {
+            return view('admin_dashboard',  [
+                'user' => $user,
+                'total_users' => User::where('acc_type', '!=', 'A')->count(),
+                'total_rpas' => Rpas::count(),
+                'total_orders' => Order::count()
+            ]);
+        }
 
         $time_used = time() - strtotime($user->registered_at);
         $days_used = 0;
@@ -333,8 +343,6 @@ class AuthController extends Controller
 
     public function updateMPData()
     {
-        $old_users = 
-
         dd('Finaly');
     }
 }

@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Rpas::class);
     }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

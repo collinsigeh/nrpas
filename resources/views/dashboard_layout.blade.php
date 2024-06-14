@@ -60,25 +60,40 @@
                 <span>Dashboard</span>
               </a>
             </li>
-            <li>
-              <a href="{{ route('profile.show') }}" class="nav-link px-3 active">
-                <span class="me-2"><i class="bi bi-person-fill"></i></span>
-                <span>User Profile</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('rpas.index') }}" class="nav-link px-3 active">
-                <span class="me-2"><i class="bi bi-list-check"></i></span>
-                <span>Registered RPAS</span>
-                <span class="badge bg-white rounded-pill text-info">{{ Auth::user()->rpases->count() }}</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('rpas.create')}}" class="nav-link px-3 active">
-                <span class="me-2"><i class="bi bi-plus-square"></i></span>
-                <span>Add Drone</span>
-              </a>
-            </li>
+            @if (Auth::user()->acc_type == 'A')
+              <li>
+                <a href="#" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-box-seam"></i></span>
+                  <span>Packages</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-receipt"></i></span>
+                  <span>Orders</span>
+                </a>
+              </li>
+            @else
+              <li>
+                <a href="#" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-receipt"></i></span>
+                  <span>Subscription orders</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('rpas.index') }}" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-list-check"></i></span>
+                  <span>Registered RPAS</span>
+                  <span class="badge bg-white rounded-pill text-info">{{ Auth::user()->rpases->count() }}</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('rpas.create')}}" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-plus-square"></i></span>
+                  <span>Add Drone</span>
+                </a>
+              </li>
+            @endif
             <li>
               <a href="{{ route('logout')}}" class="nav-link px-3 active d-block d-lg-none">
                 <span class="me-2"><i class="bi bi-box-arrow-right"></i></span>
