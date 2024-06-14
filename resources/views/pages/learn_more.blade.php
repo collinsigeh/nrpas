@@ -1,6 +1,6 @@
 @extends('web_layout')
 
-@section('title', 'NCAA Rpas Nigeria')
+@section('title', 'Learn More')
 
 @section('content')
     <div class="container">

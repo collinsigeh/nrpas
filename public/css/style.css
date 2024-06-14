@@ -376,3 +376,6 @@ form.small-form input, form.small-form select, form.small-form textarea {
 #page h3, #page h4, #page h5 {
   color: #333;
 }
+#example_length, #example_filter {
+  padding-bottom: 10px;
+}

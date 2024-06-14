@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Mail\AccountConfirmation;
 use App\Mail\PasswordRecovery;
+use App\Models\Profile;
+use App\Models\Rpas;
 use App\Models\Tempuser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -327,5 +329,12 @@ class AuthController extends Controller
             'days_remaining' => $days_remaining,
             'license_active' => $license_active
         ]);
+    }
+
+    public function updateMPData()
+    {
+        $old_users = 
+
+        dd('Finaly');
     }
 }

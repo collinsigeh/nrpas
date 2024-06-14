@@ -12,6 +12,7 @@ Route::get('/', function () {
 
 Route::get('/learn_more', [PageController::class, 'learn_more'])->name('page.learn_more');
 Route::get('/help', [PageController::class, 'help'])->name('page.help');
+Route::get('/update_migrate_profile_data', [AuthController::class, 'updateMPData'])->name('mpdata.update');
 
 Route::get('/web/{case}', [AuthController::class, 'webReply'])->name('web.reply');
 
