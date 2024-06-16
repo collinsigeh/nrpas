@@ -4,6 +4,13 @@
 
 @section('content')
 @include('inc.alert_messages')
+<div class="row">
+    <div class="col-xl-9">
+        <div class="alert alert-info text-center text-md-start" style="line-height: 3em;">
+            You do not have an active subscription. <a href="{{ route('orders.create') }}" class="btn btn-primary">Subscribe Now</a>
+        </div>
+    </div>
+</div>
 <div class="row counters">
     <div class="col-md-4 col-xl-3">
         <div class="main-item main-item-1">

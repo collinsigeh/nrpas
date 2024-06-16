@@ -12,12 +12,15 @@ class Order extends Model
 
     protected $fillable = [
         'package_id',
+        'validity',
         'user_id',
         'price',
         'discount_amount',
         'final_amount',
         'is_payment_confirmed',
-        'payment_confirmed_at'
+        'payment_confirmed_at',
+        'is_activated',
+        'activated_at'
     ];
 
     public function package(): BelongsTo

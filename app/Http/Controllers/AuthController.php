@@ -316,7 +316,7 @@ class AuthController extends Controller
 
         $time_used = time() - strtotime($user->registered_at);
         $days_used = 0;
-        $days_remaining = 365;
+        $days_remaining = 365 * $user->validity;
         $license_active = 1;
 
         if($time_used >= (24 * 60 * 60))

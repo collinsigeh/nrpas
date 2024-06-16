@@ -23,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'registered_at',
+        'order_id',
+        'validity',
         'profile_complete',
         'acc_type_set',
         'acc_type'
@@ -61,8 +63,15 @@ class User extends Authenticatable
         return $this->hasMany(Rpas::class);
     }
 
+    // for all subscription orders
     public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    // for currently running subscription
+    public function order(): HasOne
+    {
+        return $this->hasOne(Order::class);
     }
 }

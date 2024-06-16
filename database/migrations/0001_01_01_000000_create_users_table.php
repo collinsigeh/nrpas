@@ -18,7 +18,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamp('registered_at')->nullable(); // when the current 1 year subscription (will) start running
+            $table->timestamp('registered_at')->nullable(); // when the current (1 year) subscription (will) start running
+            $table->foreignId('order_id')->nullable()->constrained()->cascadeOnDelete(); // the current subscription order being enjoyed.
+            $table->integer('validity')->default(1); // how long (in years) will the crrent subscription run for
             $table->boolean('profile_complete')->default(false);
             $table->boolean('acc_type_set')->default(false);
             $table->string('acc_type', 20)->nullable();

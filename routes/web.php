@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -54,4 +55,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('certificate/{id}', [RpasController::class, 'certificate'])->name('rpas.certificate');
 
     Route::resource('/packages', PackageController::class);
+    Route::resource('/orders', OrderController::class);
 });
