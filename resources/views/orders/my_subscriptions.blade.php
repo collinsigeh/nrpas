@@ -11,6 +11,10 @@
 
         <div style="border-top: 1px dotted #333; height: 20px;"></div>
 
+        <div class="text-end mb-3">
+            <a href="{{ route('orders.create') }}" class="btn btn-sm btn-primary mb-2">New subscription</a>
+        </div>
+
           <div class="table-responsive">
             <table
               id="example"

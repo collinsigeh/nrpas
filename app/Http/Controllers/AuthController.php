@@ -334,10 +334,19 @@ class AuthController extends Controller
             $license_active = 0;
         }
 
+        $unpaid_subs = 0;
+        foreach ($user->orders as $sub_order) {
+            if(!$sub_order->is_payment_confirmed)
+            {
+              $unpaid_subs++;
+            }
+        }
+        
         return view('dashboard',  [
             'user' => $user,
             'days_remaining' => $days_remaining,
-            'license_active' => $license_active
+            'license_active' => $license_active,
+            'unpaid_subs' => $unpaid_subs
         ]);
     }
 

@@ -73,11 +73,29 @@
                   <span>Orders</span>
                 </a>
               </li>
+              <li>
+                <a href="{{ route('settings.edit') }}" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-gear"></i></span>
+                  <span>Settings</span>
+                </a>
+              </li>
             @else
               <li>
                 <a href="{{ route('subscriptions.index') }}" class="nav-link px-3 active">
                   <span class="me-2"><i class="bi bi-receipt"></i></span>
                   <span>My subscriptions</span>
+                  @php
+                    $unpaid_subs = 0;
+                    foreach (Auth::user()->orders as $key => $sub_order) {
+                      if(!$sub_order->is_payment_confirmed)
+                      {
+                        $unpaid_subs++;
+                      }
+                    }
+                  @endphp
+                  @if ($unpaid_subs > 0)
+                    <span class="badge bg-danger rounded-pill text-white">{{ $unpaid_subs }}</span>
+                  @endif
                 </a>
               </li>
               <li>

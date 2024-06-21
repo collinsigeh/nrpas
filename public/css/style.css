@@ -389,5 +389,10 @@ form.small-form input, form.small-form select, form.small-form textarea {
   padding: 30px 10px 10px 10px;
   width: 100%;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
+}
+.item_summary {
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin: 20px auto;
 }

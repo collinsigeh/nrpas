@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Package;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -83,7 +84,16 @@ class OrderController extends Controller
      */
     public function make_payment(string $id)
     {
-        dd('I got here');
+        $order = Order::findOrFail($id);
+        if($order->is_payment_confirmed)
+        {
+            return to_route('subscriptions.index');
+        }
+
+        return view('orders.make_payment', [
+            'order' => $order,
+            'setting' => Setting::first()
+        ]);
     }
 
     /**

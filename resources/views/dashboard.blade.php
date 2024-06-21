@@ -9,6 +9,11 @@
         <div class="alert alert-info text-center text-md-start" style="line-height: 3em;">
             You do not have an active subscription. <a href="{{ route('orders.create') }}" class="btn btn-primary">Subscribe Now</a>
         </div>
+        @if ($unpaid_subs > 0)
+            <div class="alert alert-info text-center text-md-start" style="line-height: 3em;">
+                You have {{ $unpaid_subs }} unpaid {{ Str::plural('subscription', $unpaid_subs) }}. <a href="{{ route('subscriptions.index') }}" class="btn btn-primary">View list</a>
+            </div>
+        @endif
     </div>
 </div>
 <div class="row counters">
