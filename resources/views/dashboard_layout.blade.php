@@ -81,6 +81,12 @@
               </li>
             @else
               <li>
+                <a href="{{ route('profile.show')}}" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-person-fill"></i></span>
+                  <span>My profile</span>
+                </a>
+              </li>
+              <li>
                 <a href="{{ route('subscriptions.index') }}" class="nav-link px-3 active">
                   <span class="me-2"><i class="bi bi-receipt"></i></span>
                   <span>My subscriptions</span>

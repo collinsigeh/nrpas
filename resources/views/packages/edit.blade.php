@@ -28,7 +28,7 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="price">Price (@include('inc.currency_symbol'))</label>
-                            <input type="number" id="price" name="price" class="form-control" value="{{ $package->price }}" required>
+                            <input type="text" id="price" name="price" class="form-control" value="{{ $package->price }}" required>
                         </div>
                         <div class="form-group mb-4">
                             <label for="status">Status</label>

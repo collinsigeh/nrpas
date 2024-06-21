@@ -27,7 +27,7 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="price">Price (@include('inc.currency_symbol'))</label>
-                            <input type="number" id="price" name="price" class="form-control" value="{{ old('validity') }}" required>
+                            <input type="text" id="price" name="price" class="form-control" value="{{ old('validity') }}" required>
                         </div>
                         <div class="form-group mb-4">
                             <label for="status">Status</label>
