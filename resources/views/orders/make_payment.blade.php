@@ -71,7 +71,7 @@
                             <input type="hidden" id="ref" value="{{ $order->id }}" required />
                             </div>
                             <div class="form-group">
-                            <input type="hidden" id="public_key" value="{{ $order->id }}" required />
+                            <input type="hidden" id="public_key" value="{{ $setting->paystack_public_key }}" required />
                             </div>
                             <div class="form-group">
                             <input type="hidden" id="first-name" value="{{ $order->user->profile->firstname }}" />
@@ -102,11 +102,12 @@
                             amount: document.getElementById("amount").value * 100,
                             ref: document.getElementById("ref").value, 
                             onClose: function(){
-                            alert('Window closed.');
+                                alert('You did NOT complete the payment. Please try again.');
                             },
                             callback: function(response){
-                            let message = 'Payment complete! Reference: ' + response.reference;
-                            alert(message);
+                                window.location.href = "{{ route('subscriptions.confirm_payment', $order->id) }}";
+                                // let message = 'Payment complete! Reference: ' + response.reference;
+                                // alert(message);
                             }
                         });
 

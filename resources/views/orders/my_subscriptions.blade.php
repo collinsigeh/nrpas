@@ -72,6 +72,7 @@
                                 <form action="{{ route('orders.destroy', $subscription->id)}}" method="post" style="display: inline-block">
                                   @csrf
                                   @method('delete')
+                                  <input type="checkbox" name="confirm" id="" required>
                                   <button class="btn btn-sm btn-danger mb-2">Cancel order</button>
                                 </form>
                             @endif
