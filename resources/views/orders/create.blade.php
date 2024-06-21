@@ -11,41 +11,30 @@
 
         <div style="border-top: 1px dotted #333; height: 20px;"></div>
         
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <div class="bg-light p-4">
-                    <form action="{{ route('packages.store') }}" method="post">
-                        @csrf
-
-                        <div class="form-group mb-4">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" class="form-control" value="{{ old('name') }}" required>
+        <label for="subscription">Select a subscription package</label>
+        <div class="row mt-3">
+            @foreach ($packages as $package)
+                <div class="col-md-6 col-xl-4">
+                    <div class="subscription-item">
+                        <h5>{{ $package->name }}</h5>
+                        <div>
+                            <small class="text-muted">Valid for: </small>
+                            {{ $package->validity.' '.Str::plural('year', $package->validity) }}
                         </div>
-                        <div class="form-group mb-4">
-                            <label for="validity">Validity (Years)</label>
-                            <input type="number" id="validity" name="validity" class="form-control" value="{{ old('validity') }}" required>
+                        <div class="py-3">
+                            @include('inc.currency_symbol') 
+                            <span style="font-weight: 900; font-size: 18px;">
+                                {{ number_format($package->price, 2, '.', ',') }}
+                            </span>
                         </div>
-                        <div class="form-group mb-4">
-                            <label for="price">Price (@include('inc.currency_symbol'))</label>
-                            <input type="number" id="price" name="price" class="form-control" value="{{ old('validity') }}" required>
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="status">Status</label>
-                            <select name="status" id="status" class="form-select" required>
-                                <option value="Active" @if (old('is_active') == 1)
-                                        selected
-                                    @endif>Active</option>
-                                <option value="Inactive"@if (old('is_active') != 1)
-                                        selected
-                                    @endif>Inactive</option>
-                            </select>
-                        </div>
-                        <div class="mb-4 text-center">
-                            <input type="submit" value="Save" class="my-custom-primary-web-button" style="font-size: 18px; padding: 8px 22px;">
-                        </div>
-                    </form>
+                        <form action="{{ route('orders.store')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="package_id" value="{{ $package->id }}">
+                            <input type="submit" value="Buy" class="my-custom-primary-web-button">
+                        </form>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
     </div>

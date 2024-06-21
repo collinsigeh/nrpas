@@ -24,6 +24,15 @@ class OrderController extends Controller
         ]);
     }
 
+    public function my_subscriptions()
+    {
+        $user = Auth()->user();
+        
+        return view('orders.my_subscriptions', [
+            'subscriptions' => Order::where('user_id', $user->id)->orderBy('created_at', 'desc')->get()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -47,7 +56,34 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        $request->validate([
+            'package_id' => 'required|integer|min:1'
+        ]);
+
+        $package = Package::findOrFail($request->package_id);
+
+        $order = Order::create(
+            [
+                'package_id' => $package->id,
+                'validity' => $package->validity,
+                'user_id' => $user->id,
+                'price' => $package->price,
+                'discount_amount' => 0,
+                'final_amount' =>$package->price
+            ]
+        );
+
+        return to_route('subscriptions.make_payment', $order->id)->with('success_message', 'Order saved. Please make payment for this order.');
+    }
+
+    /**
+     * Display page to make payment for order with the specified id
+     */
+    public function make_payment(string $id)
+    {
+        dd('I got here');
     }
 
     /**
@@ -79,6 +115,20 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = Auth()->user();
+
+        $order = order::findOrFail($id);
+
+        if($order->is_payment_confirmed)
+        {
+            return  back()->with('error_message', 'This order cannot be deleted because it has been paid for.');
+        }
+        if($order->user_id != $user->id)
+        {
+            return  back()->with('error_message', 'You do not have permission to delete this order.');
+        }
+
+        $order->delete();
+        return to_route('subscriptions.index')->with('success_message', 'Cancelled and deleted successfully');
     }
 }

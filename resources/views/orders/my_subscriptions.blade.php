@@ -1,13 +1,13 @@
 @extends('dashboard_layout')
 
-@section('title', 'Orders')
+@section('title', 'My subscriptions')
 
 @section('content')
 @include('inc.alert_messages')
 <div class="row" id="admin_body">
     <div class="col-md-12 px-4 py-3">
 
-        <h2 class="my-custom-title mb-3">Orders</h2>
+        <h2 class="my-custom-title mb-3">My subscriptions</h2>
 
         <div style="border-top: 1px dotted #333; height: 20px;"></div>
 
@@ -19,9 +19,7 @@
             >
               <thead>
                 <tr>
-                  <th>Order by</th>
-                  <th>Item</th>
-                  <th>Validity</th>
+                  <th>Package</th>
                   <th>Price (@include('inc.currency_symbol'))</th>
                   <th>Discount received (@include('inc.currency_symbol'))</th>
                   <th>Amount paid (@include('inc.currency_symbol'))</th>
@@ -30,44 +28,49 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($orders as $order)
+                @foreach ($subscriptions as $subscription)
                     <tr>
                         <td>
-                            <b>{{ $order->user->profile->firstname.' '.$order->user->profile->lastname }}</b><br>
-                            <small class="text-muted">{{ $order->user->email }}</small>
-                        </td>
-                        <td>{{ $order->package->name }}</td>
-                        <td>{{ $order->validity.Str::plural('year', $order->validity) }}</td>
-                        <td>
-                            @include('inc.currency_symbol')
-                            {{ number_format($order->price, 2, '.')}}
+                            <b>{{ $subscription->package->name }}</b><br>
+                            <small class="text-muted">{{ 'Valid for '.$subscription->validity.Str::plural('year', $subscription->validity) }}</small>
                         </td>
                         <td>
                             @include('inc.currency_symbol')
-                            {{ number_format($order->discount_amount, 2, '.')}}
+                            {{ number_format($subscription->price, 2, '.')}}
                         </td>
                         <td>
                             @include('inc.currency_symbol')
-                            {{ number_format($order->final_amount, 2, '.')}}
+                            {{ number_format($subscription->discount_amount, 2, '.')}}
+                        </td>
+                        <td>
+                            @include('inc.currency_symbol')
+                            {{ number_format($subscription->final_amount, 2, '.')}}
                         </td>
                         <td>
                             <b>
-                                @if ($order->is_activated)
+                                @if ($subscription->is_activated)
                                     <span class="text-success">Completed</span><br>
-                                    <small class="text-muted">Activated on {{ date('d M, Y', strtotime($order->activated_at)) }}</small>
+                                    <small class="text-muted">Activated on {{ date('d M, Y', strtotime($subscription->activated_at)) }}</small>
                                 @else
-                                    @if ($order->is_payment_confirmed)
+                                    @if ($subscription->is_payment_confirmed)
                                         <span class="text-success">Paid</span><br>
-                                        <small class="text-muted">Confirmed on {{ date('d M, Y', strtotime($order->payment_confirmed_at)) }}</small>
+                                        <small class="text-muted">Confirmed on {{ date('d M, Y', strtotime($subscription->payment_confirmed_at)) }}</small>
                                     @else
                                         <span class="text-danger">Unpaid</span><br>
-                                        <small class="text-muted">Requested on {{ date('d M, Y', strtotime($order->created_at)) }}</small>
+                                        <small class="text-muted">Requested on {{ date('d M, Y', strtotime($subscription->created_at)) }}</small>
                                     @endif
                                 @endif
                             </b>
                         </td>
                         <td class="text-end">
-                            <a href="{{ route('orders.edit', $order->id)}}" class="btn btn-sm btn-outline-primary mb-2"><i class="bi bi-pencil-fill"></i></a>
+                            @if (!$subscription->is_payment_confirmed)
+                                <a href="{{ route('subscriptions.make_payment', $subscription->id)}}" class="btn btn-sm btn-primary mb-2">Make payment</a>
+                                <form action="{{ route('orders.destroy', $subscription->id)}}" method="post" style="display: inline-block">
+                                  @csrf
+                                  @method('delete')
+                                  <button class="btn btn-sm btn-danger mb-2">Cancel order</button>
+                                </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

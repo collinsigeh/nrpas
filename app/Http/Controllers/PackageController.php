@@ -20,7 +20,7 @@ class PackageController extends Controller
         }
         
         return view('packages.index', [
-            'packages' => Package::orderBy('name', 'asc')->get()
+            'packages' => Package::orderBy('validity', 'asc')->get()
         ]);
     }
 
