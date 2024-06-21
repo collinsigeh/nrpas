@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('price', 10, 2);
             $table->float('discount_amount', 10, 2)->default(0);
             $table->float('final_amount', 10, 2);
+            $table->float('amount_paid', 10, 2)->nullable();
             $table->boolean('is_payment_confirmed')->default(false);
             $table->dateTime('payment_confirmed_at')->nullable();
             $table->boolean('is_activated')->default(false);

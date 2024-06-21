@@ -24,8 +24,7 @@
               <thead>
                 <tr>
                   <th>Package</th>
-                  <th>Price (@include('inc.currency_symbol'))</th>
-                  <th>Discount received (@include('inc.currency_symbol'))</th>
+                  <th>Amount billed (@include('inc.currency_symbol'))</th>
                   <th>Amount paid (@include('inc.currency_symbol'))</th>
                   <th>Status</th>
                   <th></th>
@@ -40,15 +39,11 @@
                         </td>
                         <td>
                             @include('inc.currency_symbol')
-                            {{ number_format($subscription->price, 2, '.')}}
-                        </td>
-                        <td>
-                            @include('inc.currency_symbol')
-                            {{ number_format($subscription->discount_amount, 2, '.')}}
-                        </td>
-                        <td>
-                            @include('inc.currency_symbol')
                             {{ number_format($subscription->final_amount, 2, '.')}}
+                        </td>
+                        <td>
+                            @include('inc.currency_symbol')
+                            {{ number_format($subscription->amount_paid, 2, '.')}}
                         </td>
                         <td>
                             <b>

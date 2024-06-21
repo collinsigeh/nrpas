@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Package;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
@@ -98,11 +100,25 @@ class OrderController extends Controller
 
     public function payment_confirmed($id)
     {
-        dd('I got here. Now let us verify the payment for order: '.$id);
+        $order = Order::findOrFail($id);
+        if($order->is_activated)
+        {
+            return to_route('dashboard')->with('error_message', 'Subscription activated since: '.date('d M, Y', strtotime($order->activated_at)));
+        }
+        elseif($order->is_payment_confirmed)
+        {
+            return to_route('dashboard')->with('error_message', 'Payment confirmed since: '.date('d M, Y', strtotime($order->payment_confirmed_at)));
+        }
+
+        $setting = Setting::first();
+        if(!$setting)
+        {
+            return to_route('dashboard')->with('An unexpected error occured due to missing settings. Please contact admin.');
+        }
         $curl = curl_init();
   
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.paystack.co/transaction/verify/:reference",
+            CURLOPT_URL => "https://api.paystack.co/transaction/verify/".$order->id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -110,7 +126,7 @@ class OrderController extends Controller
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => "GET",
             CURLOPT_HTTPHEADER => array(
-            "Authorization: Bearer SECRET_KEY",
+            "Authorization: Bearer ".$setting->paystack_secret_key,
             "Cache-Control: no-cache",
             ),
         ));
@@ -121,10 +137,41 @@ class OrderController extends Controller
         curl_close($curl);
         
         if ($err) {
-            echo "cURL Error #:" . $err;
-        } else {
-            echo $response;
+            return to_route('dashboard')->with('error_message', 'cURL Error #:'.$err);
+        } 
+        
+        $response = json_decode($response);
+        if($response->data->status != 'success' || $response->data->reference != $order->id)
+        {
+            return to_route('dashboard')->with('error_message', 'Payment could not be confirmed.');
         }
+        if($response->data->amount < $order->final_amount)
+        {
+            return to_route('dashboard')->with('error_message', 'There is disparity in the payment amount received.');
+        }
+
+        $order->amount_paid = $response->data->amount / 100;
+        $order->is_payment_confirmed = 1;
+        $order->payment_confirmed_at = date('Y-m-d H:i:s', strtotime($response->data->paid_at));
+
+        $order->save();
+
+        $activated_at = date('Y-m-d H:i:s', time());
+
+        $user = User::findOrFail($order->user_id);
+        
+        $user->registered_at = $activated_at;
+        $user->order_id = $order->id;
+        $user->validity = $order->validity;
+
+        $user->save();
+
+        $order->is_activated = 1;
+        $order->activated_at = $activated_at;
+
+        $order->save();
+
+        return to_route('dashboard')->with('success_message', 'Payment confirmed and subscription activated successfully.');
     }
 
     /**

@@ -30,7 +30,7 @@
             <div class="main-value">@if ($license_active)
                 ACTIVE
             @else
-                INACTIVE
+                EXPIRED
             @endif</div>
             <div class="main-description">@if (Auth::user()->acc_type == 'R')
                 Recreational

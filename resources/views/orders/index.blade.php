@@ -22,8 +22,8 @@
                   <th>Order by</th>
                   <th>Item</th>
                   <th>Validity</th>
-                  <th>Price (@include('inc.currency_symbol'))</th>
-                  <th>Discount received (@include('inc.currency_symbol'))</th>
+                  <th>Discount given (@include('inc.currency_symbol'))</th>
+                  <th>Amount billed (@include('inc.currency_symbol'))</th>
                   <th>Amount paid (@include('inc.currency_symbol'))</th>
                   <th>Status</th>
                   <th></th>
@@ -36,19 +36,25 @@
                             <b>{{ $order->user->profile->firstname.' '.$order->user->profile->lastname }}</b><br>
                             <small class="text-muted">{{ $order->user->email }}</small>
                         </td>
-                        <td>{{ $order->package->name }}</td>
+                        <td>
+                            {{ $order->package->name }}<br>
+                            <small class="text-muted">
+                                @include('inc.currency_symbol')
+                                {{ number_format($order->price, 2, '.', ',')}}
+                            </small>
+                        </td>
                         <td>{{ $order->validity.Str::plural('year', $order->validity) }}</td>
                         <td>
                             @include('inc.currency_symbol')
-                            {{ number_format($order->price, 2, '.')}}
+                            {{ number_format($order->discount_amount, 2, '.', ',')}}
                         </td>
                         <td>
                             @include('inc.currency_symbol')
-                            {{ number_format($order->discount_amount, 2, '.')}}
+                            {{ number_format($order->final_amount, 2, '.', ',')}}
                         </td>
                         <td>
                             @include('inc.currency_symbol')
-                            {{ number_format($order->final_amount, 2, '.')}}
+                            {{ number_format($order->amount_paid, 2, '.', ',')}}
                         </td>
                         <td>
                             <b>
