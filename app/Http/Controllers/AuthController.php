@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\AccountConfirmation;
 use App\Mail\PasswordRecovery;
 use App\Models\Order;
+use App\Models\Package;
 use App\Models\Profile;
 use App\Models\Rpas;
 use App\Models\Tempuser;
@@ -310,7 +311,9 @@ class AuthController extends Controller
                 'user' => $user,
                 'total_users' => User::where('acc_type', '!=', 'A')->count(),
                 'total_rpas' => Rpas::count(),
-                'total_orders' => Order::count()
+                'total_orders' => Order::count(),
+                'active_packages' => Package::where('is_active', 1)->count(),
+                'all_packages' => Package::count()
             ]);
         }
 

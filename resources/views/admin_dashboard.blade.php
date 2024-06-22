@@ -4,6 +4,19 @@
 
 @section('content')
 @include('inc.alert_messages')
+<div class="row">
+    <div class="col-xl-9">
+        @if ($active_packages < 1)
+            <div class="alert alert-info text-center text-md-start" style="line-height: 3em;">
+                <p>There is <b>no active subscription package</b> for users to buy.</p>
+                <a href="{{ route('packages.create') }}" class="btn btn-primary">Create new package</a>
+                @if ($all_packages > 0)
+                    <a href="{{ route('packages.index') }}" class="btn btn-primary">View existing packages</a>
+                @endif
+            </div>
+        @endif
+    </div>
+</div>
 <div class="row counters">
     <div class="col-md-4 col-xl-3">
         <div class="main-item main-item-1">
