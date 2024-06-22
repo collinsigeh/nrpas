@@ -111,12 +111,7 @@ class RpasController extends Controller
 
     public function certificate($id)
     {
-        $rpas = Rpas::where('id', $id)->where('user_id', Auth::user()->id)->first();
-
-        if(!$rpas)
-        {
-            return to_route('rpas.index')->with('error_message', 'We could not retrieve the requested certificate. Please try again.');
-        }
+        $rpas = Rpas::findOrFail($id);
 
         $total_days = $rpas->user->validity * 365;
         $days_used = floor((time() - strtotime($rpas->user->registered_at)) / (24 * 60 * 60));

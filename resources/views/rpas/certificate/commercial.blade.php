@@ -1,10 +1,10 @@
-@extends('web_layout')
+@extends('dashboard_layout')
 
 @section('title', 'RPAS (Drone) Certificate')
 
 @section('content')
 <div class="container" id="main-body">
-  <div style="height: 140px;"></div>
+  <div style="height: 20px;"></div>
   <div class="row">
       <div class="col-12">
           <h1 class="my-custom-title text-center pb-4">Commercial certificate</h1>
