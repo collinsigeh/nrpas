@@ -7,7 +7,7 @@
 <div class="row" id="admin_body">
     <div class="col-md-12 px-4 py-3">
 
-        <h2 class="my-custom-title mb-3">User rpas</h2>
+        <h2 class="my-custom-title mb-3">Registered RPAS</h2>
 
         <div style="border-top: 1px dotted #333; height: 20px;"></div>
 
@@ -21,6 +21,7 @@
                 <tr>
                     <th>RPAS</th>
                     <th>Certificate No.</th>
+                    <th>Certificate Status</th>
                     <th>Owner</th>
                     <th>Manufacturer</th>
                     <th>Serial No.</th>
@@ -33,6 +34,22 @@
                     <tr>
                         <td>{{ $rpas->nickname}}</td>
                         <td><a href="{{ route('rpas.certificate', $rpas->id)}}" class="my_custom_table_link" title="Click to view certificate">{{ $rpas->cert_no}}</a></td>
+                        <td>
+                            @php
+                                $total_days = $rpas->user->validity * 365;
+                                $days_used = floor((time() - strtotime($rpas->user->registered_at)) / (24 * 60 * 60));
+                                $days_remaining = $total_days - $days_used;
+                                if($days_remaining < 0)
+                                {
+                                    $days_remaining = 0;
+                                }
+                            @endphp
+                            @if ($days_remaining > 0)
+                                <span class="badge badge-pill bg-success text-white">Active</span>
+                            @else
+                                <span class="badge badge-pill bg-danger text-white">Expired</span>
+                            @endif
+                        </td>
                         <td>
                             @if ($rpas->user->profile->org_name)
                                 {{ $rpas->user->profile->org_name }}

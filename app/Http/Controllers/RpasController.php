@@ -121,7 +121,7 @@ class RpasController extends Controller
             $days_remaining = 0;
         }
 
-        if($days_remaining = 0)
+        if($days_remaining == 0)
         {
             return to_route('web.reply', 'suspended_certificate_type');
         }
