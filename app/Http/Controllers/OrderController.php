@@ -87,7 +87,7 @@ class OrderController extends Controller
     public function make_payment(string $id)
     {
         $order = Order::findOrFail($id);
-        if($order->is_payment_confirmed)
+        if($order->is_payment_confirmed && $order->amount_paid >= $order->final_amount)
         {
             return to_route('subscriptions.index');
         }
@@ -187,7 +187,15 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = Auth()->user();
+        if($user->acc_type != 'A')
+        {
+            return to_route('dashboard');
+        }
+        
+        return view('orders.edit', [
+            'order' => Order::findOrFail($id)
+        ]);
     }
 
     /**
@@ -195,7 +203,72 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = Auth()->user();
+        if($user->acc_type != 'A')
+        {
+            return to_route('dashboard');
+        }
+
+        $order = Order::findOrFail($id);
+
+        $request->validate([
+            'amount_paid' => 'required|numeric|min:0',
+            'status' => 'required|in:Activate,Do NOT activate'
+        ]);
+
+        $activation_time = date('Y-m-d H:i:s', time());
+        
+        $order->amount_paid = $request->amount_paid;
+        $order->is_payment_confirmed = 1;
+        $order->payment_confirmed_at = $activation_time;
+        if($request->status == 'Activate')
+        {
+            $buyer = User::findOrFail($order->user_id);
+
+            $buyer->registered_at = $activation_time;
+            $buyer->order_id = $order->id;
+            $buyer->validity = $order->validity;
+
+            $buyer->save();
+
+            $order->is_activated = 1;
+            $order->activated_at = $activation_time;
+        }
+        $order->save();
+        return to_route('orders.index')->with('success_message', 'Update saved!');
+    }
+
+    public function activate($id)
+    {
+        $order = Order::findOrFail($id);
+
+        if($order->is_activated)
+        {
+            return back()->with('error_message', 'The specified subscription was activated since '.date('d M, Y', strtotime($order->activated_at).'.'));
+        }
+        if(!$order->is_payment_confirmed)
+        {
+            return back()->with('error_message', 'Activation failed becasue the payment for the specified order has NOT been confirmed.');
+        }
+        if($order->amount_paid < $order->final_amount)
+        {
+            return back()->with('error_message', 'Activation fialed because the amount paid is less than the amount billed.');
+        }
+
+        $activation_time = date('Y-m-d H:i:s', time());
+
+        $user = User::findOrFail($order->user_id);
+        $user->registered_at = $activation_time;
+        $user->order_id = $order->id;
+        $user->validity = $order->validity;
+
+        $user->save();
+
+        $order->is_activated = 1;
+        $order->activated_at = $activation_time;
+
+        $order->save();
+        return to_route('dashboard')->with('success_message', 'Subscription activated successfully!');
     }
 
     /**

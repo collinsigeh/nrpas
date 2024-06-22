@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('certificate/{id}', [RpasController::class, 'certificate'])->name('rpas.certificate');
 
     Route::resource('/packages', PackageController::class);
+    Route::get('/subscriptions/{id}/activate', [OrderController::class, 'activate'])->name('subscriptions.activate');
     Route::get('/subscriptions/{id}/confirm_payment', [OrderController::class, 'payment_confirmed'])->name('subscriptions.confirm_payment');
     Route::get('/subscriptions/{id}/make_payment', [OrderController::class, 'make_payment'])->name('subscriptions.make_payment');
     Route::get('/subscriptions', [OrderController::class, 'my_subscriptions'])->name('subscriptions.index');

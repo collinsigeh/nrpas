@@ -73,7 +73,9 @@
                             </b>
                         </td>
                         <td class="text-end">
-                            <a href="{{ route('orders.edit', $order->id)}}" class="btn btn-sm btn-outline-primary mb-2"><i class="bi bi-pencil-fill"></i></a>
+                            @if (!$order->is_activated)
+                                <a href="{{ route('orders.edit', $order->id)}}" class="btn btn-sm btn-outline-primary mb-2"><i class="bi bi-pencil-fill"></i></a>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

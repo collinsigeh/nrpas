@@ -1,6 +1,6 @@
 @extends('dashboard_layout')
 
-@section('title', 'New package')
+@section('title', 'Edit package')
 
 @section('content')
 @include('inc.alert_messages')

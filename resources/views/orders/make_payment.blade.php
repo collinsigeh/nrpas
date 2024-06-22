@@ -102,7 +102,7 @@
                             amount: document.getElementById("amount").value * 100,
                             ref: document.getElementById("ref").value, 
                             onClose: function(){
-                                alert('You did NOT complete the payment. Please try again.');
+                                alert('You did NOT complete the payment. Please try again or contact the admin.');
                             },
                             callback: function(response){
                                 window.location.href = "{{ route('subscriptions.confirm_payment', $order->id) }}";

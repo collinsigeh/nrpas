@@ -70,6 +70,12 @@
                                   <input type="checkbox" name="confirm" id="" required>
                                   <button class="btn btn-sm btn-danger mb-2">Cancel order</button>
                                 </form>
+                            @elseif (!$subscription->is_activated)
+                                @if ($subscription->amount_paid < $subscription->final_amount)
+                                    <a href="{{ route('subscriptions.make_payment', $subscription->id) }}" class="btn btn-sm btn-primary">Make payment</a>
+                                @else
+                                    <a href="{{ route('subscriptions.activate', $subscription->id) }}" class="btn btn-sm btn-primary">Activate</a>
+                                @endif
                             @endif
                         </td>
                     </tr>
