@@ -9,6 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class RpasController extends Controller
 {
+    public function all_rpas()
+    {
+        $user = Auth()->user();
+        if($user->acc_type != 'A')
+        {
+            return to_route('dashboard');
+        }
+        
+        return view('rpas.all', [
+            'rpases' => Rpas::orderBy('nickname', 'asc')->get()
+        ]);
+    }
+
     public function safetyAgreement()
     {
         return view('rpas.safety_agreement');
@@ -102,24 +115,38 @@ class RpasController extends Controller
 
         if(!$rpas)
         {
-            return back()->with('error_message', 'We could not retrieve the requested certificate. Please try again.');
+            return to_route('rpas.index')->with('error_message', 'We could not retrieve the requested certificate. Please try again.');
         }
+
+        $total_days = $rpas->user->validity * 365;
+        $days_used = floor((time() - strtotime($rpas->user->registered_at)) / (24 * 60 * 60));
+        $days_remaining = $total_days - $days_used;
+        if($days_remaining < 0)
+        {
+            $days_remaining = 0;
+        }
+
+        if($days_remaining = 0)
+        {
+            return to_route('web.reply', 'suspended_certificate_type');
+        }
+
+        $certificate_expiration = strtotime($rpas->user->registered_at) + ($rpas->user->validity * 365 * 24 * 60 * 60);
 
         if($rpas->user->acc_type == 'R')
         {
             return view('rpas.certificate.recreational', [
-                'rpas' => $rpas
+                'rpas' => $rpas,
+                'certificate_expiration' => $certificate_expiration
             ]);
         }
         elseif($rpas->user->acc_type == 'C')
         {
             return view('rpas.certificate.commercial', [
-                'rpas' => $rpas
+                'rpas' => $rpas,
+                'certificate_expiration' => $certificate_expiration
             ]);
         }
-        else
-        {
-            return to_route('web.reply', 'suspended_certificate_type');
-        }
+        return to_route('dashboard');
     }
 }

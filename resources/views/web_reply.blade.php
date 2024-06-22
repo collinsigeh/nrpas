@@ -16,7 +16,7 @@
           </div>
           @else
           <div class="mt-4 text-center">
-              <a href="{{route('dashboard')}}" class="my-custom-link">Home</a>
+              <a href="{{route('dashboard')}}" class="my-custom-primary-web-button">Home</a>
           </div>
           @endguest
       </div>

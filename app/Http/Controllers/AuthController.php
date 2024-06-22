@@ -271,10 +271,11 @@ class AuthController extends Controller
         }
         elseif($case == 'suspended_certificate_type')
         {
-            $message = '<h2 class="my-custom-title text-center pb-3">Suspended Certificate Type</h2>
+            $message = '<h2 class="my-custom-title text-center pb-3">Suspended Certificate</h2>
                 <div class="alert alert-danger text-center">
-                    <p>The requested certificate type has been suspended.<p>
-                    Please contact our office for more details.
+                    <p>The requested certificate has been suspended.<p>
+                    <p>Please renew your subscription to reactive this certificate.</p>
+                    <a href="'.route('orders.create').'" class="my-custom-primary-web-button">Subscribe Now</a>
                 </div>
             ';
         }

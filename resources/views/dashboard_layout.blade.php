@@ -74,6 +74,18 @@
                 </a>
               </li>
               <li>
+                <a href="{{ route('users.index') }}" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-people-fill"></i></span>
+                  <span>Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="{{ route('rpas.all') }}" class="nav-link px-3 active">
+                  <span class="me-2"><i class="bi bi-list-check"></i></span>
+                  <span>Registered RPAS</span>
+                </a>
+              </li>
+              <li>
                 <a href="{{ route('settings.edit') }}" class="nav-link px-3 active">
                   <span class="me-2"><i class="bi bi-gear"></i></span>
                   <span>Settings</span>

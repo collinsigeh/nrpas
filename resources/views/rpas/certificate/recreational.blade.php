@@ -44,7 +44,7 @@
                               Date Issued: <b>{{ date('d-m-Y', strtotime($rpas->user->registered_at)) }}</b>
                           </div>
                           <div style="font-size: 19px; margin-bottom: 10px;">
-                              Certificate Expiration Date: <b>{{ date('d-m-Y', strtotime($rpas->user->registered_at) + (365 * 24 * 60 * 60)) }}</b>
+                              Certificate Expiration Date: <b>{{ date('d-m-Y', $certificate_expiration) }}</b>
                           </div>
                       </div>
                   </div>
@@ -157,7 +157,7 @@
                                   <td style="width: 300px; height: 50px; padding-left: 20px; font-size: 24px; color: #fff;">Certificate Expiration Date:</td>
                                   <td style="font-size: 27px; color: #fff;">
                                       <b>
-                                          {{ date('d-m-Y', strtotime($rpas->user->registered_at) + (365 * 24 * 60 * 60)) }}
+                                          {{ date('d-m-Y', $certificate_expiration) }}
                                       </b>
                                   </td>
                               </tr>

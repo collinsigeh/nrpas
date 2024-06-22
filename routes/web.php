@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RpasController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -47,7 +48,7 @@ Route::group(['middleware' => 'auth'], function() {
     
     Route::get('/profile', [ProfileController::class, 'profile'])->name('profile.show');
     Route::post('/profile', [ProfileController::class, 'profilePost'])->name('profile.update');
-
+    
     Route::get('/safety_agreement', [RpasController::class, 'safetyAgreement'])->name('rpas.safety');
     Route::post('/safety_agreement', [RpasController::class, 'safetyAgreementPost'])->name('rpas.safety.post');
     Route::get('/add_rpas', [RpasController::class, 'create'])->name('rpas.create');
@@ -64,4 +65,7 @@ Route::group(['middleware' => 'auth'], function() {
 
     Route::patch('/settings/update', [SettingController::class, 'update'])->name('settings.update');
     Route::get('/settings', [SettingController::class, 'edit'])->name('settings.edit');
+
+    Route::get('/users/rpas', [RpasController::class, 'all_rpas'])->name('rpas.all');
+    Route::resource('/users', UserController::class);
 });
