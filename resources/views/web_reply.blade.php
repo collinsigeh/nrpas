@@ -7,7 +7,7 @@
   <div style="height: 140px;"></div>
   <div class="row">
       </div>
-      <div class="col-8 offset-2">
+      <div class="col-md-8 offset-md-2">
           {!! $message !!}
           @guest
           <div class="mt-4 text-center">

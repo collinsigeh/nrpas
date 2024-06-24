@@ -144,4 +144,18 @@ class RpasController extends Controller
         }
         return to_route('dashboard');
     }
+
+    public function verify(Request $request)
+    {
+        $rpas = null;
+        if($request->cert_id)
+        {
+            $rpas = Rpas::where('cert_no', $request->cert_id)->first();
+        }
+        
+        return view('rpas.certificate.verification', [
+            'rpas' => $rpas,
+            'search_parameter' => $request->cert_id
+        ]);
+    }
 }

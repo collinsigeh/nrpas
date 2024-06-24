@@ -30,11 +30,7 @@
                       <div class="text-white">
                           <div style="font-size: 19px; margin-bottom: 10px;">
                               Certificate Holder: <b>
-                                  @if ($rpas->user->profile->org_name)
-                                      {{ $rpas->user->profile->org_name }}
-                                  @else
-                                      {{ $rpas->user->profile->firstname.' '.$rpas->user->profile->lastname }}
-                                  @endif
+                                {{ $rpas->user->profile->firstname.' '.$rpas->user->profile->lastname }}
                               </b>
                           </div>
                           <div style="font-size: 19px; margin-bottom: 10px;">

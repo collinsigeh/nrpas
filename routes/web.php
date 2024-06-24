@@ -17,6 +17,7 @@ Route::get('/', function () {
 Route::get('/learn_more', [PageController::class, 'learn_more'])->name('page.learn_more');
 Route::get('/help', [PageController::class, 'help'])->name('page.help');
 Route::get('/update_migrate_profile_data', [AuthController::class, 'updateMPData'])->name('mpdata.update');
+Route::get('/verify', [RpasController::class, 'verify'])->name('certificate.verification');
 
 Route::get('/web/{case}', [AuthController::class, 'webReply'])->name('web.reply');
 

@@ -271,13 +271,26 @@ class AuthController extends Controller
         }
         elseif($case == 'suspended_certificate_type')
         {
-            $message = '<h2 class="my-custom-title text-center pb-3">Suspended Certificate</h2>
+            if(Auth()->user()->acc_type == 'A')
+            {
+                $message = '<h2 class="my-custom-title text-center pb-3">Suspended Certificate</h2>
+                <div class="alert alert-danger text-center">
+                    <p class="pt-4">The requested certificate has been suspended due to expired subscription.<p>
+                    <a href="'.route('rpas.all').'" class="my-custom-primary-web-button"><i class="bi bi-arrow-left-short mr-2"></i>Back</a>
+                </div>
+            ';
+            }
+            else
+            {
+                $message = '<h2 class="my-custom-title text-center pb-3">Suspended Certificate</h2>
                 <div class="alert alert-danger text-center">
                     <p>The requested certificate has been suspended.<p>
                     <p>Please renew your subscription to reactive this certificate.</p>
                     <a href="'.route('orders.create').'" class="my-custom-primary-web-button">Subscribe Now</a>
+                    <a href="'.route('rpas.index').'" class="my-custom-secondary-web-button"><i class="bi bi-arrow-left-short mr-2"></i>Back</a>
                 </div>
             ';
+            }
         }
         elseif($case == 'error')
         {

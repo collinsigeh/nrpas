@@ -10,7 +10,7 @@
           <h1 class="my-custom-title">Login or Create Account</h1>
       </div>
 
-      <div class="col-8 offset-2">
+      <div class="col-md-8 offset-md-2">
           @include('inc.alert_messages')
 
           <form action="{{ route('login.post') }}" method="post" class="mt-4">

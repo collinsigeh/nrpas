@@ -51,7 +51,7 @@
                             @endif
                         </td>
                         <td>
-                            @if ($rpas->user->profile->org_name)
+                            @if ($rpas->user->acc_type == 'C' && $rpas->user->profile->org_name)
                                 {{ $rpas->user->profile->org_name }}
                             @else
                                 {{ $rpas->user->firstname.' '. $rpas->user->lastname }}
