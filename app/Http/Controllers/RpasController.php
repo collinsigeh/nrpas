@@ -24,6 +24,15 @@ class RpasController extends Controller
 
     public function safetyAgreement()
     {
+        $user = Auth()->user();
+        $total_days = $user->validity * 365;
+        $days_used = floor((time() - strtotime($user->registered_at)) / (24 * 60 * 60));
+        $days_remaining = $total_days - $days_used;
+        if($days_remaining <= 0)
+        {
+            return to_route('dashboard')->with('error_message', 'Your license has expired. Please <a href="'.route('orders.create').'" style="color: #6F1010;">subscribe<a> to continue.');
+        }
+
         return view('rpas.safety_agreement');
     }
 
@@ -51,6 +60,15 @@ class RpasController extends Controller
             return to_route('rpas.safety')->with('error_message', 'Please agree to all the safety conditions before adding your RPAS (drone)');
         }
 
+        $user = Auth()->user();
+        $total_days = $user->validity * 365;
+        $days_used = floor((time() - strtotime($user->registered_at)) / (24 * 60 * 60));
+        $days_remaining = $total_days - $days_used;
+        if($days_remaining <= 0)
+        {
+            return to_route('dashboard')->with('error_message', 'Your license has expired. Please <a href="'.route('orders.create').'" style="color: #6F1010;">subscribe<a> to continue.');
+        }
+
         return view('rpas.create', [
             'rpastypes' => Rpastype::all()
         ]);
@@ -61,6 +79,14 @@ class RpasController extends Controller
         if(!session('safety_accepted') || session('safety_accepted') != 1)
         {
             return to_route('rpas.safety')->with('error_message', 'Please agree to all the safety conditions before adding your RPAS (drone)');
+        }
+        $user = Auth()->user();
+        $total_days = $user->validity * 365;
+        $days_used = floor((time() - strtotime($user->registered_at)) / (24 * 60 * 60));
+        $days_remaining = $total_days - $days_used;
+        if($days_remaining <= 0)
+        {
+            return to_route('dashboard')->with('error_message', 'Your license has expired. Please <a href="'.route('orders.create').'" style="color: #6F1010;">subscribe<a> to continue.');
         }
 
         $request->validate([
@@ -96,7 +122,7 @@ class RpasController extends Controller
             return back()->with('error_message', 'An unexpected error occured. Please try again.');
         }
 
-        $rpas->cert_no = 'NRPAS/CERT/'.$rpas->id;
+        $rpas->cert_no = 'NRPAS/CERT2/'.$rpas->id;
         $rpas->registered_at = date('Y-m-d H:i:s', time());
         $rpas->save();
         $request->session()->forget('safety_agreement');
