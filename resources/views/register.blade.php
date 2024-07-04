@@ -16,7 +16,7 @@
 
                   @include('inc.alert_messages')
 
-                  <form action="{{ route('register.post') }}" method="post" class="mt-4">
+                  <form action="{{ route('register.post.no_confirmation') }}" method="post" class="mt-4">
                       @csrf
       
                       <div class="mb-4">

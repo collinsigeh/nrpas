@@ -22,6 +22,34 @@ class AuthController extends Controller
         return view('register');
     }
 
+    public function regPostWithoutConfirmation(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|unique:tempusers|unique:users',
+            'password' => 'required|string|min:8|confirmed'
+        ]);
+
+        $confirmation_code = md5(uniqid(rand()));
+
+        $user = User::firstOrCreate(
+            [
+                'email' => $request->email,
+                'password' => Hash::make($request->password)
+            ]
+        );
+
+        if(!$user)
+        {
+            return back()->with('error_message', '<p>Account Not Created!</p>Your NRPAS account could not be created. Please try again.');
+        }
+
+        $user->reg_no = 'NRPAS-'.$user->id;
+        $user->registered_at = date('Y-m-d H:i:s', time());
+        $user->save();
+
+        return to_route('login')->with('success_message', 'Account created successfully. Please log in to proceed.');
+    }
+
     public function regPost(Request $request)
     {
         $request->validate([

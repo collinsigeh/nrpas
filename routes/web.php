@@ -23,6 +23,7 @@ Route::get('/web/{case}', [AuthController::class, 'webReply'])->name('web.reply'
 
 Route::group(['middleware' => 'guest'], function(){
     Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register/without_confirmation', [AuthController::class, 'regPostWithoutConfirmation'])->name('register.post.no_confirmation');
     Route::post('/register', [AuthController::class, 'regPost'])->name('register.post');
     Route::get('/account_confirmation/{confirmation_code}', [AuthController::class, 'confirmReg'])->name('register.confirmation');
 
